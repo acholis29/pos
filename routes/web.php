@@ -23,28 +23,61 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    Route::prefix('employee')->group(function () {
+        Route::middleware([
+                'validateRole:Admin'
+            ])->group(function () {
+                Route::get('/', function () { return view('bo.employee.index'); })->name('list');
+                Route::get('schedule', function () { return view('bo.employee.schedule'); })->name('schedule');
+            });
+    });
+
     Route::prefix('dashboard')->group(function () {
         Route::get('/',[\App\Http\Controllers\DashboardHomeController::class,'index'])->name('dashboard');
        
         //----- khusus admin
-        Route::middleware([
-            'validateRole:Admin'
-        ])->group(function () {
-            Route::prefix('manage')->group( function () {
+            Route::middleware([
+                'validateRole:Admin'
+            ])->group(function () {
+                
                 Route::resource('users', App\Http\Controllers\UserController::class)->name('index', 'manageusers');
-               // Route::put('users/{id}/suspend', [App\Http\Controllers\UserSuspensionController::class, 'suspend'])->name('manageusers.suspend');
-                //Route::put('users/{id}/activate', [App\Http\Controllers\UserSuspensionController::class, 'activate'])->name('manageusers.activate');
 
-                //Route::get('locations', function () {
-                //    return view('dashboard.manage-locations.index');
-                //})->name('managelocations');
+               
             });
-        });
 
         //---- khusus admin, employee
         Route::middleware([
             'validateRole:Admin,Employee'
         ])->group(function () {
+            Route::middleware([
+                        'validateRole:Admin,Employee'
+                    ])->group(function () {
+                        
+
+                        Route::prefix('bo')->group( function () {
+                            
+
+                            Route::get('deals', function () {
+                                return view('dashboard.manage-deals.index');
+                            })->name('managedeals');
+
+                            Route::get('categories', function () {
+                                return view('dashboard.manage-categories.index');
+                            })->name('managecategories' );
+
+                            Route::get('categories/create', function () {
+                                return view('dashboard.manage-categories.index');
+                            })->name('managecategories.create');
+
+                            Route::get('appointments', function () {
+                                return view('dashboard.manage-appointments.index');
+                            })->name('manageappointments');
+                        } );
+
+
+
+
+                    });
 
         });
 

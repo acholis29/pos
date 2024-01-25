@@ -22,7 +22,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ $appMarkRoute }}">
                       <!--  <x-application-mark class="block h-9 w-auto" />-->
-                       <img src="{{ asset('img/logo.png') }}" alt="" style="width:140px ;" class=" mx-auto">
+                       <img src="{{ asset('images/logo.png') }}" alt="" style="width:160px ;" class=" mx-auto">
 
                     </a>
                 </div>
@@ -47,9 +47,9 @@
 
                     <!-- Auth Navigation Links -->
                     @auth
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    {{--<x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
-                    </x-nav-link>
+                    </x-nav-link>--}}
                     @else
                     <x-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
                         {{ __('Login') }}
@@ -136,6 +136,11 @@
                         </x-slot>
 
                         <x-slot name="content">
+                            <x-dropdown-link href="{{ route('dashboard') }}">
+                                {{ __('Dashboard') }}
+                            </x-dropdown-link>
+                                <div class="border-t border-gray-200"></div>
+
                             @if($userRole == 'Customer')
                                 <div class="block px-4 py-2 text-xs text-gray-400">
                                     {{ __('Shop') }}
@@ -161,7 +166,7 @@
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
-                            @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                            @if (Laravel\Jetstream\Jetstream::hasApiFeatures()&&$userRole == 'Admin')
                                 <x-dropdown-link href="{{ route('api-tokens.index') }}">
                                     {{ __('API Tokens') }}
                                 </x-dropdown-link>

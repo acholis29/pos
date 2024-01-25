@@ -8,11 +8,16 @@ use Illuminate\Http\Request;
 class DashboardHomeController extends Controller
 {
     public function index(){
-        if (auth()->user()->role_id !=='99'){
-            return view('dashboard.cust');
-        }else{
-            return view('dashboard.admin-empl');
+        $role=auth()->user()->role_id;
+       
 
-        };
+        switch ($role) {
+       
+        case '1':
+            return view('dashboard.cust');
+            break;
+        default:
+            return view('bo.dashboard');
+        }
     }
 }

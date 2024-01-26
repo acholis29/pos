@@ -2,14 +2,7 @@
     $userRole = Auth::User()?->role()->first()->name;
 @endphp
 
-<script>
-    function menuactive_left(id) {
-        $('#ul-leftmainmenu li').removeClass('active');
-        $('#' + id).addClass('active');
-        $('#' + id).parent().parent().addClass('active');
-    }
 
-</script>
 
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
@@ -42,7 +35,7 @@
     <ul id="ul-leftmainmenu" class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li class="active treeview">
-            <a href="/">
+            <a href="{{ route('dashboard') }}">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
         </li>
@@ -53,8 +46,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li id='li-msemployee'><a href="/employee/"><i class="fa fa-circle-o"></i> Employee</a></li>
-                <li id='li-msschedule'><a href="/employee/schedule"><i class="fa fa-circle-o"></i> Schedule</a></li>
+                <li id='li-msemployee'><a href="{{ route('employee') }}"><i class="fa fa-circle-o"></i> Employee</a></li>
+                <li id='li-msschedule'><a href="{{ route('emp-schedule') }}"><i class="fa fa-circle-o"></i> Schedule</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> Deposit</a></li>
             </ul>
         </li>
@@ -62,7 +55,7 @@
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-cubes"></i>
-                <span>Sales</span>
+                <span>Services</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">

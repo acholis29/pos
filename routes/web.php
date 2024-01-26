@@ -23,12 +23,15 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+
     Route::prefix('employee')->group(function () {
         Route::middleware([
                 'validateRole:Admin'
             ])->group(function () {
-                Route::get('/', function () { return view('bo.employee.index'); })->name('list');
-                Route::get('schedule', function () { return view('bo.employee.schedule'); })->name('schedule');
+                Route::get('/', function () { return view('bo.employee.index'); })->name('employee');
+                Route::get('schedule', function () { return view('bo.employee.schedule'); })->name('emp-schedule');
+                Route::post('/', [\App\Http\Controllers\EmployeeApi::class, 'index'])->name('api-list');
+
             });
     });
 

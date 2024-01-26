@@ -1,26 +1,36 @@
 <?php
-
+ 
 namespace App\Providers;
-
-// use Illuminate\Support\Facades\Gate;
+ 
+use App\Models\Post;
+use App\Policies\PostPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+
+Gate::guessPolicyNamesUsing(function ($modelClass) {
+    // Return the name of the policy class for the given model...
+});
 
 class AuthServiceProvider extends ServiceProvider
 {
     /**
-     * The model to policy mappings for the application.
+     * The policy mappings for the application.
      *
-     * @var array<class-string, class-string>
+     * @var array
      */
     protected $policies = [
-        //
+        Post::class => PostPolicy::class,
     ];
-
+ 
     /**
-     * Register any authentication / authorization services.
+     * Register any application authentication / authorization services.
+     *
+     * @return void
      */
-    public function boot(): void
+    public function boot()
     {
+        $this->registerPolicies();
+ 
         //
     }
 }

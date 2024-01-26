@@ -265,7 +265,7 @@
                             <img src="/img/avatar04.png" class="img-circle" alt="User Image">
                             <p>
                                 {{$userRole }}
-                                <small>Date Login @DateTime.Now.ToString("dd MMM yyyy h:mm tt")</small>
+                                <small>Date Login <?php echo Date('Y');?> </small>
                             </p>
                         </li>
                         <!-- Menu Footer-->

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -41,27 +43,30 @@
         <script src="{{asset('Scripts/_vararray.js')}}"></script>
     </head>
     
-    
+   
     <body class="hold-transition sidebar-mini skin-l-gradient fixed ">
         <x-admin.navtop />
 
                 {{ $slot }}
-        
-
-
-
-
-
-
             <div class="wrapper">
                 <footer class="main-footer">
                     <div class="pull-right hidden-xs">
                         <b>Version</b> {{app()->version();}}
                     </div>
-                    <strong>Copyright &copy; @DateTime.Today.Year  <a href="http://tukangcoding.net">tukangCoding.net</a></strong> All rights
+                    <strong>Copyright &copy; <?php echo Date('Y');?> <a href="http://tukangcoding.net">tukangCoding.net</a></strong> All rights
                     reserved.
                 </footer>
             </div>
     </body>
 
 </html>
+
+
+<script>
+    function menuactive_left(id) {
+        $('#ul-leftmainmenu li').removeClass('active');
+        $('#' + id).addClass('active');
+        $('#' + id).parent().parent().addClass('active');
+    }
+
+</script>

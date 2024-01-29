@@ -33,6 +33,8 @@
 
         <script src="{{asset('Scripts/Plugins/jquery.js')}}"></script>
         <script src="{{asset('Scripts/jquery/jquery-ui-1.12.js')}}"></script>
+            <script src="{{asset('Scripts/Plugins/iCheck/icheck.js')}}"></script>
+
         <script src="{{asset('Scripts/Plugins/bootstrap.js')}}"></script>
         <script src="{{asset('Scripts/Plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
             <script src="{{asset('Scripts/Plugins/jquery.tukangcoding.js')}}"></script>
@@ -41,6 +43,9 @@
         <script src="{{asset('Scripts/Apps/app.js')}}"></script>
         <script src="{{asset('Scripts/_references.js')}}"></script>
         <script src="{{asset('Scripts/_vararray.js')}}"></script>
+
+        @livewireStyles
+
     </head>
     
    
@@ -57,6 +62,9 @@
                     reserved.
                 </footer>
             </div>
+            @stack('modals')
+
+        @livewireScripts
     </body>
 
 </html>

@@ -17,7 +17,7 @@ class EmployeeApi extends Controller
         $this->authorizeResource(Post::class, 'post');
     }
     
-    public function index(Request $request)
+    public function index(Request $r)
     {
        // $rateLimit = Limit::perMinute(10)->by(optional(auth()->user())->id ?: request()->ip());
       //  $queryHiddenData = false;
@@ -31,8 +31,10 @@ class EmployeeApi extends Controller
         }*/
 
 
-
-        $emp = DB::table('ms_employee')->where('full_name', 'like', '%'.$request->get('s').'%')->paginate(20);
+        $p= $r['p'] ? $r['p'] : 10;
+        $emp = DB::table('ms_employee')->where('full_name', 'like', '%'.$r['s'].'%')
+        ->orderBy('full_name', 'asc')
+        ->paginate($p);
 
         return response()->json($emp, 200);
 

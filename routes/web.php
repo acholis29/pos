@@ -28,8 +28,8 @@ Route::middleware([
         Route::middleware([
                 'validateRole:Admin'
             ])->group(function () {
-                Route::get('/', function () { return view('bo.employee.index'); })->name('employee');
-                Route::get('schedule', function () { return view('bo.employee.schedule'); })->name('emp-schedule');
+                Route::get('/', [\App\Http\Controllers\EmployeeController::class,'index'])->name('employee');
+                Route::get('schedule', [\App\Http\Controllers\EmployeeController::class,'schedule'])->name('emp-schedule');
                 Route::post('/', [\App\Http\Controllers\EmployeeApi::class, 'index'])->name('api-list');
 
             });
